@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({extended : false}));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(session({
-	secret: 'just-relax',
+	secret: 'volunteer',
 	resave: false,
     saveUninitialized: false,
     cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 }
@@ -40,10 +40,8 @@ fs.readdirSync(modelsPath).forEach(function (file) {
 // 跨域设置
 app.all('*', function(req, res, next) {
 	res.header('Access-Control-Allow-Origin', '*');
-	res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+	res.header('Access-Control-Allow-Headers', 'Origin, No-Cache, X-Requested-With, If-Modified-Since, Pragma, Last-Modified, Cache-Control, Expires, Content-Type, X-E4M-With');
 	res.header('Access-Control-Allow-Methods', 'PUT,POST,GET,DELETE,OPTIONS');
-	res.header('X-Powered-By', '3.2.1');
-	res.header('Content-Type', 'text/json;charset=utf-8');
 	next();
 })
 

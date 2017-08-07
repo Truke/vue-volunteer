@@ -2,26 +2,26 @@
   <div class="team-mem">
         <div class="container">
             <div class="team-main">
-                <h3>Our Team</h3>
+                <h3>团队</h3>
                 <div class="col-md-4 team-grid">
                     <img src="../assets/images/t1.jpg" alt="" class="img-responsive">
                     <div class="team-details">
-                        <h4>undertakes laborious</h4>
-                        <p>To take a trivial example, which of us ever undertakes laborious physical </p>
+                        <h4>斯坦森</h4>
+                        <p>BBC纪录片导演</p>
                     </div>
                 </div>
                 <div class="col-md-4 team-grid">
                     <img src="../assets/images/t2.jpg" alt="" class="img-responsive">
                     <div class="team-details">
-                        <h4>undertakes laborious</h4>
-                        <p>To take a trivial example, which of us ever undertakes laborious physical </p>
+                        <h4>薇薇安</h4>
+                        <p>比安提大中华区执行总裁</p>
                     </div>
                 </div>
                 <div class="col-md-4 team-grid">
                     <img src="../assets/images/t3.jpg" alt="" class="img-responsive">
                     <div class="team-details">
-                        <h4>undertakes laborious</h4>
-                        <p>To take a trivial example, which of us ever undertakes laborious physical </p>
+                        <h4>咋克伯格</h4>
+                        <p>talkwith CEO</p>
                     </div>
                 </div>
                 <div class="clearfix"> </div>

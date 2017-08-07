@@ -5,8 +5,8 @@
                 <h3>邮件订阅</h3>
                 <p>我们会定期向您推送相关资讯，以便您能够及时的关注。</p>
                 <form>
-                    <input type="text" value="" placeholder="请输入邮箱">
-                    <input type="submit" value="订 阅">
+                    <input type="text" placeholder="请输入邮箱" v-model="email">
+                    <input type="submit" value="订 阅" @click="sendEmail()">
                 </form>
                 <div class="clearfix"> </div>
             </div>
@@ -15,13 +15,32 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   data () {
     return {
-      msg: ''
+      email: ''
     }
   },
   methods: {
+    sendEmail () {
+      if (this.email === '') {
+        this.$parent.$refs.toast.showToast('邮箱不能为空', {
+          theme: 'error',
+          timeLife: 1000
+        })
+      } else {
+        axios.post('http://localhost:3031/api/email/sendEmail', {email: this.email}).then((response) => {
+          if (response.data.success) {
+            this.$parent.$refs.toast.showToast(response.data.msg, {
+              theme: 'success',
+              timeLife: 1000
+            })
+          }
+        })
+      }
+    }
   }
 }
 </script>

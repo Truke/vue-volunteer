@@ -1,20 +1,18 @@
 <template>
   <div class="home grab" ref="homeWrapper">
     <div class="contentS">
-      <iframe id="myframe" frameborder="0" src="http://localhost:8080/#/add_contract.html" style="width:800px;height:800px;"></iframe>
       <banner></banner>
       <features></features>
       <newsletter></newsletter>
       <gallery></gallery>
       <events></events>
       <team></team>
-      <contact></contact>
+      <contact :status='logined'></contact>
     </div>
     <a id="toTop" href="javascript:;" @click="toTop">
       <span></span>
     </a>
     <vue-toast ref="toast"></vue-toast>
-    <login v-if="tologin"></login>
   </div>
 </template>
 
@@ -37,20 +35,21 @@ export default {
   data () {
     return {
       tologin: false,
+      logined: false,
       betterscroll: null
     }
-  },
-  created () {
-    this.tologin = this.$route.params.type === 'login'
-    this.logined = this.$route.params.type === 'admin'
   },
   mounted () {
     this.$refs.toast.setOptions({
       position: 'top right'
     })
-    setTimeout(() => {
-      this._initScroll()
-    }, 100)
+    this.$nextTick(() => {
+      this.tologin = this.$route.params.type === 'login'
+      this.logined = this.$route.params.type === 'admin'
+      setTimeout(() => {
+        this._initScroll()
+      }, 200)
+    })
   },
   methods: {
     _initScroll () {
@@ -128,4 +127,5 @@ a {
 .vue-toast-manager_container{
   z-index: 1;
 }
+
 </style>

@@ -3,62 +3,16 @@
         <div class="container">
             <div class="features-main">
                 <div class="features-top">
-                    <h3>Awesome Features</h3>
-                    <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete</p>
+                    <h3>乐捐</h3>
+                    <p>乐捐平台项目统计： 募款中项目3577个 执行中项目12762个 已结束项目11569个</p>
                 </div>
                 <div class="features-bottom">
-                    <div class="features-grid">
-                        <div class="col-md-6 features-semi-grid">
-                            <span class="f1"><img src="../assets/images/s1.png" alt=""> </span>
+                    <div class="features-grid" v-for="item,index in listTemp">
+                        <div class="col-md-6 features-semi-grid" v-for="cell,j in item">
+                            <span class="f1"><img :src="cell.src" alt=""> </span>
                             <div class="fea-text">
-                                <h4>Upload</h4>
-                                <p>To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault</p>
-                            </div>
-                            <div class="clearfix"> </div>
-                        </div>
-                        <div class="col-md-6 features-semi-grid">
-                            <span class="f1"><img src="../assets/images/s2.png" alt=""> </span>
-                            <div class="fea-text">
-                                <h4>Inventore </h4>
-                                <p>To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault</p>
-                            </div>
-                            <div class="clearfix"> </div>
-                        </div>
-                        <div class="clearfix"> </div>
-                    </div>
-                    <div class="features-grid">
-                        <div class="col-md-6 features-semi-grid">
-                            <span class="f1"><img src="../assets/images/s3.png" alt=""> </span>
-                            <div class="fea-text">
-                                <h4>Donate</h4>
-                                <p>To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault</p>
-                            </div>
-                            <div class="clearfix"> </div>
-                        </div>
-                        <div class="col-md-6 features-semi-grid">
-                            <span class="f1"><img src="../assets/images/s4.png" alt=""> </span>
-                            <div class="fea-text">
-                                <h4>Nequeporro</h4>
-                                <p>To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault</p>
-                            </div>
-                            <div class="clearfix"> </div>
-                        </div>
-                        <div class="clearfix"> </div>
-                    </div>
-                    <div class="features-grid">
-                        <div class="col-md-6 features-semi-grid">
-                            <span class="f1"><img src="../assets/images/s5.png" alt=""> </span>
-                            <div class="fea-text">
-                                <h4>Foundation</h4>
-                                <p>To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault</p>
-                            </div>
-                            <div class="clearfix"> </div>
-                        </div>
-                        <div class="col-md-6 features-semi-grid">
-                            <span class="f1"><img src="../assets/images/s6.png" alt=""> </span>
-                            <div class="fea-text">
-                                <h4>cum soluta</h4>
-                                <p>To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault</p>
+                                <h4>{{cell.title}}</h4>
+                                <p>{{cell.description}}</p>
                             </div>
                             <div class="clearfix"> </div>
                         </div>
@@ -75,7 +29,53 @@
 export default {
   data () {
     return {
-      msg: ''
+      list: [{
+        id: 1,
+        src: require('../assets/images/s1.png'),
+        title: '抗战老兵关怀计划',
+        description: '已筹：40539278.43元 捐款人数: 2723124人'
+      }, {
+        id: 2,
+        src: require('../assets/images/s2.png'),
+        title: '乡村支教美丽中国',
+        description: '已筹：41998949.36元 捐款人数: 28641689人'
+      }, {
+        id: 3,
+        src: require('../assets/images/s3.png'),
+        title: '未来工程师计划',
+        description: '已筹：1491708元 捐款人数: 50229人'
+      }, {
+        id: 4,
+        src: require('../assets/images/s4.png'),
+        title: '保护长城加我一个',
+        description: '已筹：1434045元 捐款人数: 174472人'
+      }, {
+        id: 5,
+        src: require('../assets/images/s5.png'),
+        title: '壹基金净水计划',
+        description: '已筹：535570元 捐款人数: 94746人'
+      }, {
+        id: 6,
+        src: require('../assets/images/s6.png'),
+        title: '寻四百万份光明之爱',
+        description: '已筹：4018530元 捐款人数: 362573人'
+      }]
+    }
+  },
+  computed: {
+    listTemp () {
+      let list = this.list
+      let arrTemp = []
+      let index = 0
+      let sectionCount = 2
+      for (let i = 0; i < list.length; i++) {
+        index = parseInt(i / sectionCount)
+        if (arrTemp.length <= index) {
+          arrTemp.push([])
+        }
+        arrTemp[index].push(list[i])
+      }
+      return arrTemp
     }
   },
   methods: {
@@ -86,6 +86,7 @@ export default {
 <style scoped>
   .features {
     padding: 3.5em 0em 3.5em 0em;
+    position: relative;
   }
   .features-top {
     text-align: center;

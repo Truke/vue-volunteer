@@ -22,8 +22,10 @@ exports.addContact = function(req, res, next) {
 	})
 }
 
+
 // 获取反馈列表
 exports.getContactList = function(req, res, next) {
+	
 	var currentPage = (parseInt(req.query.currentPage) > 0) ? parseInt(req.query.currentPage) : 1;
 	var itemsPerPage = (parseInt(req.query.itemsPerPage) > 0) ? parseInt(req.query.itemsPerPage) : 10;
 	var startRow = (currentPage - 1) * itemsPerPage;

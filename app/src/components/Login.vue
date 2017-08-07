@@ -2,9 +2,9 @@
   <div class="dialog">
     <div class="overlay"></div>
     <div class="dialogBox">
-      <div class="title">{{title}}</div>
+      <div class="dialogtitle">{{title}}</div>
       <div class="content">
-        <div class="login">
+        <div class="dialogbody login">
           <input type="text" name="userName" placeholder="用户名" v-model="post.userName">
           <input type="password" name="password" placeholder="密码" v-model="post.password">
           <button type="submit" @click="login()">登 录</button>
@@ -12,10 +12,13 @@
         </div>
       </div>
     </div>
+    <vue-toast ref="toast"></vue-toast>
   </div>
 </template>
 
 <script>
+import VueToast from 'vue-toast'
+import 'vue-toast/dist/vue-toast.min.css'
 import axios from 'axios'
 import cookie from '@/util/cookie'
 
@@ -29,34 +32,37 @@ export default {
       }
     }
   },
+  mounted () {
+    this.$refs.toast.setOptions({
+      position: 'top right'
+    })
+  },
   methods: {
     login () {
-      if (!event._constructed) {
-        return
-      }
       if (this.post.userName === '') {
-        this.$parent.$refs.toast.showToast('姓名不能为空', {
+        this.$refs.toast.showToast('姓名不能为空', {
           theme: 'error',
           timeLife: 1000
         })
       } else if (this.post.password === '') {
-        this.$parent.$refs.toast.showToast('密码不能为空', {
+        console.log(this)
+        this.$refs.toast.showToast('密码不能为空', {
           theme: 'error',
           timeLife: 1000
         })
       } else {
         axios.post('http://localhost:3031/api/user/login', this.post).then((response) => {
-          if (!response.success) {
+          if (response.data.success) {
             cookie.setCookie('isLogin', '1', 7)
-            this.$parent.$refs.toast.showToast(response.msg, {
+            this.$refs.toast.showToast(response.data.msg, {
               theme: 'success',
               timeLife: 1000
             })
             setTimeout(() => {
-              this.$router.push({path: '/'})
-            }, 1000)
+              this.$router.push({path: '/admin'})
+            }, 500)
           } else {
-            this.$parent.$refs.toast.showToast(response.msg, {
+            this.$refs.toast.showToast(response.data.msg, {
               theme: 'error',
               timeLife: 1000
             })
@@ -64,11 +70,13 @@ export default {
         })
       }
     }
+  },
+  components: {
+    VueToast
   }
 }
 </script>
-
-<style scoped>
+<style>
 .dialog{
   position: absolute;
   width: 100%;
@@ -77,13 +85,13 @@ export default {
   overflow: hidden;
 }
 .overlay{
-  position: fixed;
+  position: absolute;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, .5);
 }
 .dialogBox{
-  position: fixed;
+  position: absolute;
   top: 50%;
   left: 50%;
   width: 300px;
@@ -91,14 +99,14 @@ export default {
   background-color: #fff;
   border-radius: 5px;
 }
-.title{
+.dialogtitle{
   line-height: 2;
   padding:1rem 1rem 0;
 }
-.login{
+.dialogbody{
   padding: 1rem;
 }
-.login input{
+.dialogbody input{
   display: block;
   width: 100%;
   margin: 0px 0px 15px 0px;
@@ -109,6 +117,11 @@ export default {
   font-size: 14px;
   background: none;
 }
+.dialogtool{
+  padding-top: 1rem;
+}
+</style>
+<style scoped>
 .login button {
   display: block;
   width: 100%;
@@ -129,10 +142,16 @@ export default {
   -moz-transition: 0.5s all;
   -o-transition: 0.5s all;
 }
+.login button[type='reset']{
+  background: #ddd;
+}
 .login p {
   line-height: 1.6;
   padding: 1rem 0;
   font-size: 12px;
   color:#aaa;
+}
+.vue-toast-manager_container{
+  z-index: 1;
 }
 </style>

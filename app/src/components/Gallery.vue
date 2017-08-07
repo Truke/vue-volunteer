@@ -3,28 +3,27 @@
         <div class="container">
             <div class="gallery-main">
                 <div class="gallery-top">
-                    <h3>图片</h3>
-                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas </p>
+                    <h3>公益图片</h3>
                 </div>
                 <div class="gallery-bottom">
                     <div class="gallery-1">
                         <div class="col-md-3 gallery-left">
-                            <a href="../assets/images/p1.jpg" rel="title">
+                            <a href="#" rel="title">
                                 <img class="img-responsive" src="../assets/images/p1.jpg" alt="">
                             </a>
                         </div>
                         <div class="col-md-3 gallery-left">
-                            <a href="../assets/images/p2.jpg" rel="title">
+                            <a href="#" rel="title">
                                 <img class="img-responsive" src="../assets/images/p2.jpg" alt="">
                             </a>
                         </div>
                         <div class="col-md-3 gallery-left">
-                            <a href="../assets/images/p3.jpg" rel="title">
+                            <a href="#" rel="title">
                                 <img class="img-responsive" src="../assets/images/p3.jpg" alt="">
                             </a>
                         </div>
                         <div class="col-md-3 gallery-left">
-                            <a href="../assets/images/p4.jpg" rel="title">
+                            <a href="#" rel="title">
                                 <img class="img-responsive" src="../assets/images/p4.jpg" alt="">
                             </a>
                         </div>
@@ -32,22 +31,22 @@
                     </div>
                     <div class="gallery-1">
                         <div class="col-md-3 gallery-left">
-                            <a href="../assets/images/p5.jpg" rel="title">
+                            <a href="#" rel="title">
                                 <img class="img-responsive" src="../assets/images/p5.jpg" alt="">
                             </a>
                         </div>
                         <div class="col-md-3 gallery-left">
-                            <a href="../assets/images/p6.jpg" rel="title">
+                            <a href="#" rel="title">
                                 <img class="img-responsive" src="../assets/images/p6.jpg" alt="">
                             </a>
                         </div>
                         <div class="col-md-3 gallery-left">
-                            <a href="../assets/images/p7.jpg" rel="title">
+                            <a href="#" rel="title">
                                 <img class="img-responsive" src="../assets/images/p7.jpg" alt="">
                             </a>
                         </div>
                         <div class="col-md-3 gallery-left">
-                            <a href="../assets/images/p8.jpg" rel="title">
+                            <a href="#" rel="title">
                                 <img class="img-responsive" src="../assets/images/p8.jpg" alt="">
                             </a>
                         </div>

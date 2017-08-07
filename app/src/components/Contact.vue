@@ -16,11 +16,6 @@
               </div>
           </div>
       </div>
-      <div class="contactEdit">
-        <ul>
-          <li v-for="item in contactList">{{item.name}} {{item.email}} {{item.message}} {{item.create_time}}</li>
-        </ul>
-      </div>
   </div>
 </template>
 
@@ -38,9 +33,6 @@ export default {
       currentPage: 1,
       contactList: []
     }
-  },
-  mounted () {
-    this.getContactList()
   },
   methods: {
     send () {
@@ -61,27 +53,19 @@ export default {
         })
       } else {
         axios.post('http://localhost:3031/api/contact/sendContact', this.post).then((response) => {
-          if (!response.success) {
-            this.$parent.$refs.toast.showToast(response.msg, {
+          if (response.data.success) {
+            this.$parent.$refs.toast.showToast(response.data.msg, {
               theme: 'success',
               timeLife: 1000
             })
           } else {
-            this.$parent.$refs.toast.showToast(response.msg, {
+            this.$parent.$refs.toast.showToast(response.data.msg, {
               theme: 'error',
               timeLife: 1000
             })
           }
         })
       }
-    },
-    getContactList () {
-      axios.get('http://localhost:3031/api/contact/getContactList?currentPage=' + this.currentPage + '&itemsPerPage=5').then((response) => {
-        this.contactList = this.contactList.concat(response.data.data)
-      })
-    },
-    getMoreContactList () {
-      this.currentPage = this.currentPage + 1
     }
   }
 }
@@ -155,6 +139,14 @@ export default {
     -webkit-transition: 0.5s all;
     -moz-transition: 0.5s all;
     -o-transition: 0.5s all;
+  }
+  .contactEdit table{
+    width: 80%;
+    margin:0 auto;
+  }
+  .contactEdit th,
+  .contactEdit td{
+    color:#fff;
   }
   @media (max-width: 768px) {
     .contact-top h3 {

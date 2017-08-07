@@ -14,24 +14,40 @@ exports.login = function(req, res, next) {
 			res.send({success:false, msg: '用户不存在'});
 		}else {
 			if (doc[0].password == md5(safeWord + req.body.password)) {
-				req.session.isLogin = 1;
-				req.session.username = userName;
-				// res.cookie('isLogin', '1', { expires: new Date(Date.now() + 10000 * 60 * 60 * 24 * 7), httpOnly: true });
-				res.send({success: true, msg: '登录成功'});
-				console.log('登录成功' + req.cookies.isLogin + req.session.isLogin + req.session.username);
+				req.session.regenerate(function(e){
+					if(e){
+						return res.send({success: false, msg: '登录失败'})
+					}
+					req.session.isLogin = 1;
+					req.session.username = userName;
+					res.cookie('isLogin', '1', { expires: new Date(Date.now() + 10000 * 60 * 60 * 24 * 7), httpOnly: true });
+					res.send({success: true, msg: '登录成功'});
+				})
+				
 			}else{
 				res.send({success: false, msg: '密码错误'})
-				console.log('密码错误');
 			}
 		}
 	})
 }
 
+exports.checkLogin = function(req, res) {
+	
+	if(req.session.isLogin) {
+		res.send({success:true,msg:'已登录',user:req.session.userName})
+	}else{
+		res.send({success:false,msg:'未登录'})
+	}
+}
+
 // 登出
 exports.logout = function(req, res) {
-	req.session.isLogin = 0;
-	req.session.username = null;
-	// res.cookie('isLogin','0' , {expires: 0});
-	res.send({success: true, msg: '登出成功'});
-	console.log('已登出' + req.cookies.isLogin + req.session.isLogin + req.session.username);
+	req.session.destroy(function(e){
+		if(e){
+			return res.send({success: false, msg: '退出登录失败'})
+		}
+		res.cookie('isLogin','0' , {expires: 0});
+		res.send({success: true, msg: '登出成功'});
+	})
 }
+

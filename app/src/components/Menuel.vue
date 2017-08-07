@@ -13,15 +13,12 @@
           </span>
           <transition name="fade">
             <ul class="res" v-if="resstate">
-              <li v-for="item,index in list"><a @click="menuclick(index, $event)" href="javascript:;">{{item.name}}</a></li>
+              <li v-for="item,index in list"><a @click="menuclick(index, $event)" href="javascript:;">{{item.title}}</a></li>
             </ul>
           </transition>
         </div>
       </div>
       <div class="clearfix"> </div>
-    </div>
-    <div class="banner-bottom">
-      <flexslider></flexslider>
     </div>
   </div>
 </template>
@@ -33,15 +30,20 @@ export default {
     return {
       resstate: null,
       list: [{
-        name: 'Home'
+        name: 'Home',
+        title: 'Home'
       }, {
-        name: 'Features'
+        name: 'Features',
+        title: '乐捐'
       }, {
-        name: 'Gallery'
+        name: 'Gallery',
+        title: '图片'
       }, {
-        name: 'Events'
+        name: 'Events',
+        title: '活动'
       }, {
-        name: 'Contact'
+        name: 'Contact',
+        title: '联系'
       }],
       listHeight: []
     }
