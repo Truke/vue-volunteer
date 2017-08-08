@@ -7,6 +7,8 @@
         <div class="dialogbody login">
           <input type="text" name="userName" placeholder="用户名" v-model="post.userName">
           <input type="password" name="password" placeholder="密码" v-model="post.password">
+          <input type="text" name="code" placeholder="图片验证码" v-model="post.code">
+          <img :src="imgsrc" alt="" width="200" height="70" @click="getCode()">
           <button type="submit" @click="login()">登 录</button>
           <p>忘记密码请联系<a href="https://github.com/Truke">@Truke</a>，寻求解决方案</p>
         </div>
@@ -28,16 +30,31 @@ export default {
       title: '管理员登录入口',
       post: {
         userName: '',
-        password: ''
-      }
+        password: '',
+        code: ''
+      },
+      imgsrc: ''
     }
   },
   mounted () {
     this.$refs.toast.setOptions({
       position: 'top right'
     })
+    this.getCode()
   },
   methods: {
+    getCode () {
+      axios.get('http://localhost:3031/api/user/getCode').then((response) => {
+        if (response.data.success) {
+          this.imgsrc = 'http://localhost:3032/code.gif?' + Math.random()
+        } else {
+          this.$refs.toast.showToast('获取验证码失败', {
+            theme: 'error',
+            timeLife: 1000
+          })
+        }
+      })
+    },
     login () {
       if (this.post.userName === '') {
         this.$refs.toast.showToast('姓名不能为空', {

@@ -5,7 +5,7 @@
                 <h3>邮件订阅</h3>
                 <p>我们会定期向您推送相关资讯，以便您能够及时的关注。</p>
                 <form>
-                    <input type="text" placeholder="请输入邮箱" v-model="email">
+                    <input type="email" placeholder="请输入邮箱" v-model="email">
                     <input type="submit" value="订 阅" @click="sendEmail()">
                 </form>
                 <div class="clearfix"> </div>

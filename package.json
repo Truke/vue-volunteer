@@ -26,6 +26,7 @@
     "trim-html": "^0.1.7"
   },
   "devDependencies": {
-    "nodemailer": "^4.0.1"
+    "nodemailer": "^4.0.1",
+    "trek-captcha": "^0.3.0"
   }
 }

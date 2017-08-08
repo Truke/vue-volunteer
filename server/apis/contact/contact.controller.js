@@ -2,7 +2,6 @@
 
 var mongoose = require('mongoose');
 var Contact = mongoose.model('Contact');
-//var trimHtml = require('trim-html');
 
 // 发送
 exports.addContact = function(req, res, next) {

@@ -101,12 +101,14 @@ export default {
           if (response.data.data.length) {
             this.contactList = this.contactList.concat(response.data.data)
           } else {
+            this.currentPage = this.currentPage - 1
             this.$refs.toast.showToast('没有更多了', {
               theme: 'error',
               timeLife: 1000
             })
           }
         } else {
+          this.currentPage = this.currentPage - 1
           this.$refs.toast.showToast(response.data.msg, {
             theme: 'error',
             thimeLife: 1000
@@ -140,12 +142,14 @@ export default {
           if (response.data.data.length) {
             this.emailList = this.emailList.concat(response.data.data)
           } else {
+            this.currentEmailPage = this.currentEmailPage - 1
             this.$refs.toast.showToast('没有更多了', {
               theme: 'error',
               timeLife: 1000
             })
           }
         } else {
+          this.currentEmailPage = this.currentEmailPage - 1
           this.$refs.toast.showToast(response.data.msg, {
             theme: 'error',
             thimeLife: 1000

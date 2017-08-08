@@ -4,8 +4,7 @@ var mongoose = require('mongoose');
 var Email = mongoose.model('Email');
 var nodemailer  = require("nodemailer");
 var user = '635133526@qq.com';//你的邮箱账户
-var pass = 'imsbvdftghxpbbdg';//你的邮箱密码或者独立授权码
-//var trimHtml = require('trim-html');
+var pass = '';//你的邮箱密码或者独立授权码
 var smtpTransport = nodemailer.createTransport({
     pool: true,
     host: 'smtp.qq.com',
@@ -17,19 +16,20 @@ var smtpTransport = nodemailer.createTransport({
   }
 });
 
+//订阅邮件，成功则给用户发送一份订阅通知
 exports.sendEmail = function(req, res, next) {
   var email = req.body.email;
-  // smtpTransport.sendMail({
-  //  from: user,
-  //  to: email,
-  //  subject: '谢谢您订阅volunteer!',
-  //  text: '谢谢您订阅volunteer!',
-  //  html: '<h1><b>谢谢您订阅volunteer，我们将以最大的热情服务于您!</b></h1><p>如果您不需要订阅，请点击上方退订</p>'
-  // }, function(err, response) {
-  //  console.log(err, response)
-  //  if(err) {
-  //    return res.send({success: false, msg: '订阅失败'})
-  //  }
+  smtpTransport.sendMail({
+   from: user,
+   to: email,
+   subject: '谢谢您订阅volunteer!',
+   text: '谢谢您订阅volunteer!',
+   html: '<h1><b>谢谢您订阅volunteer，我们将以最大的热情服务于您!</b></h1><p>如果您不需要订阅，请点击上方退订</p>'
+  }, function(err, response) {
+   console.log(err, response)
+   if(err) {
+     return res.send({success: false, msg: '订阅失败'})
+   }
     Email.create({
       email: email
     }, function(err, doc) {
@@ -38,13 +38,12 @@ exports.sendEmail = function(req, res, next) {
       }
       res.send({success: true, msg: '订阅成功'})
     })
-  // })
+  })
 }
 
 
 // 获取邮件列表
 exports.getEmailList = function(req, res, next) {
-  
   var currentPage = (parseInt(req.query.currentPage) > 0) ? parseInt(req.query.currentPage) : 1;
   var itemsPerPage = 10;
   var startRow = (currentPage - 1) * itemsPerPage;
